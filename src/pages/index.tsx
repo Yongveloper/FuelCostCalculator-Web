@@ -9,6 +9,7 @@ import DistanceInput from '@/Components/DistanceInput';
 import FuelEfficiencyInput from '@/Components/FuelEfficiencyInput';
 import OilPriceFetchButton from '@/Components/OilPriceFetchButton';
 import { isValidNumberWithDot } from '@/utils';
+import ErrorMsg from '@/Components/ErrorMsg';
 
 interface OilInfo {
   TRADE_DT: string;
@@ -34,7 +35,8 @@ export default function Home() {
 
   const [distance, setDistance] = useState('');
   const [fuelEfficiency, setFuelEfficiency] = useState('');
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
   const [oils, setOils] = useState<IOils[]>([
     {
       name: '고급 휘발유',
@@ -96,6 +98,7 @@ export default function Home() {
       setOils(result);
     } catch (error) {
       console.error(error);
+      setError(true);
       return error;
     } finally {
       setLoading(false);
@@ -149,6 +152,7 @@ export default function Home() {
       <Typography variant="h5" component="h2" gutterBottom>
         ₩ 유류 가격
       </Typography>
+      {error && <ErrorMsg />}
       {oils[0].price === null ? (
         <OilPriceFetchButton loading={loading} onClick={fetchOilPrice} />
       ) : (
