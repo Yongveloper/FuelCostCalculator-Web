@@ -1,15 +1,6 @@
 import { Roboto } from 'next/font/google';
 import { useState, useCallback } from 'react';
-import {
-  Box,
-  Button,
-  FormControl,
-  Input,
-  InputAdornment,
-  Typography,
-} from '@mui/material';
-import LoadingButton from '@mui/lab/LoadingButton';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
+import { Button, Container, Typography } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import OilList from '@/Components/OilList';
@@ -17,6 +8,7 @@ import { usePriceContext } from '@/context/PriceProvider';
 import DistanceInput from '@/Components/DistanceInput';
 import FuelEfficiencyInput from '@/Components/FuelEfficiencyInput';
 import OilPriceFetchButton from '@/Components/OilPriceFetchButton';
+import { isValidNumberWithDot } from '@/utils';
 
 interface OilInfo {
   TRADE_DT: string;
@@ -38,6 +30,8 @@ export interface IOils {
 
 export default function Home() {
   const { price } = usePriceContext();
+  console.log(price);
+
   const [distance, setDistance] = useState('');
   const [fuelEfficiency, setFuelEfficiency] = useState('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -86,11 +80,6 @@ export default function Home() {
     []
   );
 
-  const isValidNumberWithDot = (input: string) => {
-    const regex = /^[0-9]*\.?[0-9]*$/;
-    return regex.test(input);
-  };
-
   const fetchOilPrice = async () => {
     setLoading(true);
     try {
@@ -133,7 +122,7 @@ export default function Home() {
   }
 
   return (
-    <Box
+    <Container
       sx={{
         display: 'flex',
         flexDirection: 'column',
@@ -161,7 +150,7 @@ export default function Home() {
         ₩ 유류 가격
       </Typography>
       {oils[0].price === null ? (
-        <OilPriceFetchButton onClick={fetchOilPrice} />
+        <OilPriceFetchButton loading={loading} onClick={fetchOilPrice} />
       ) : (
         <Typography variant="subtitle1" component="h4" gutterBottom>
           {new Intl.DateTimeFormat('ko-KR', { dateStyle: 'full' }).format(
@@ -171,9 +160,13 @@ export default function Home() {
         </Typography>
       )}
       <OilList oils={oils} />
-      <Button variant="contained" size="large" sx={{ width: '300px' }}>
+      <Button
+        variant="contained"
+        size="large"
+        sx={{ width: '100%', maxWidth: '320px' }}
+      >
         계산하기
       </Button>
-    </Box>
+    </Container>
   );
 }

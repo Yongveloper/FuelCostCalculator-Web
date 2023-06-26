@@ -1,4 +1,4 @@
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useRef, useState, ChangeEvent } from 'react';
 import { IOils } from '@/pages';
 import {
   Box,
@@ -10,17 +10,31 @@ import {
   RadioGroup,
 } from '@mui/material';
 import OilLIstItem from './OilLIstItem';
+import { usePriceContext } from '@/context/PriceProvider';
+import { isValidPositiveNumber } from '@/utils';
 
 interface IOilListProps {
   oils: IOils[];
 }
 
 function OilList({ oils }: IOilListProps) {
+  const { setPrice } = usePriceContext();
+  const [value, setValue] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedRadio, setSelectedRadio] = useState('직접입력');
 
-  const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSelectedRadio(event.target.value);
+  };
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const {
+      currentTarget: { value },
+    } = event;
+    if (isValidPositiveNumber(value)) {
+      setValue(value);
+      setPrice(value);
+    }
   };
 
   useEffect(() => {
@@ -66,6 +80,8 @@ function OilList({ oils }: IOilListProps) {
                 textAlign: 'right',
               },
             }}
+            onChange={handleInputChange}
+            value={value}
           />
         </FormControl>
       </Box>
