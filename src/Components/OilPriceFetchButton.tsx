@@ -12,7 +12,6 @@ function OilPriceFetchButton({ onClick }: IOilPriceFetchButtonProps) {
       sx={{
         marginBottom: '0.35em',
         display: 'flex',
-        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
       }}
