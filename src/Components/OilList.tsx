@@ -1,5 +1,4 @@
 import { memo, useEffect, useRef, useState, ChangeEvent } from 'react';
-import { IOils } from '@/pages';
 import {
   Box,
   FormControl,
@@ -12,6 +11,7 @@ import {
 import OilLIstItem from './OilLIstItem';
 import { usePriceContext } from '@/context/PriceProvider';
 import { isValidPositiveNumber } from '@/utils';
+import { IOils } from '@/types';
 
 interface IOilListProps {
   oils: IOils[];

@@ -1,4 +1,3 @@
-import React from 'react';
 import { FormControl, Input, InputAdornment } from '@mui/material';
 
 interface IDistanceInputProps {
