@@ -8,31 +8,12 @@ import { usePriceContext } from '@/context/PriceProvider';
 import DistanceInput from '@/Components/DistanceInput';
 import FuelEfficiencyInput from '@/Components/FuelEfficiencyInput';
 import OilPriceFetchButton from '@/Components/OilPriceFetchButton';
-import { isValidNumberWithDot } from '@/utils';
+import { fetchOilPrice, isValidNumberWithDot } from '@/utils';
 import ErrorMsg from '@/Components/ErrorMsg';
-
-interface OilInfo {
-  TRADE_DT: string;
-  PRODCD: string;
-  PRODNM: string;
-  PRICE: string;
-  DIFF: string;
-}
-
-interface OilData {
-  RESULT: {
-    OIL: OilInfo[];
-  };
-}
-export interface IOils {
-  name: string;
-  price: string | null;
-}
+import { IOils } from '@/types';
 
 export default function Home() {
   const { price } = usePriceContext();
-  console.log(price);
-
   const [distance, setDistance] = useState('');
   const [fuelEfficiency, setFuelEfficiency] = useState('');
   const [loading, setLoading] = useState(false);
@@ -57,8 +38,6 @@ export default function Home() {
   ]);
 
   const handleDistanceInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log('render');
-
     const {
       currentTarget: { value },
     } = event;
@@ -80,20 +59,11 @@ export default function Home() {
     }
   };
 
-  const fetchOilPrice = async () => {
+  const handleFetchOilPriceBtn = async () => {
     setLoading(true);
     try {
-      const data = await fetch(process.env.NEXT_PUBLIC_API_KEY as string);
-      const json: OilData = await data.json();
-      const result = json.RESULT.OIL.filter(
-        (oil) => oil.PRODNM !== '실내등유'
-      ).map((oil) => {
-        return {
-          name: setRename(oil.PRODNM),
-          price: Math.round(parseInt(oil.PRICE)).toLocaleString('ko-KR'),
-        };
-      });
-      setOils(result);
+      const data = await fetchOilPrice();
+      setOils(data);
     } catch (error) {
       console.error(error);
       setError(true);
@@ -102,25 +72,6 @@ export default function Home() {
       setLoading(false);
     }
   };
-
-  function setRename(oilName: string) {
-    let name = '';
-    switch (oilName) {
-      case '고급휘발유':
-        name = '고급 휘발유';
-        break;
-      case '자동차용경유':
-        name = '경유';
-        break;
-      case '휘발유':
-        name = '휘발유';
-        break;
-      case '자동차용부탄':
-        name = 'LPG';
-        break;
-    }
-    return name;
-  }
 
   return (
     <Container
@@ -152,7 +103,10 @@ export default function Home() {
       </Typography>
       {error && <ErrorMsg />}
       {oils[0].price === null ? (
-        <OilPriceFetchButton loading={loading} onClick={fetchOilPrice} />
+        <OilPriceFetchButton
+          loading={loading}
+          onClick={handleFetchOilPriceBtn}
+        />
       ) : (
         <Typography variant="subtitle1" component="h4" gutterBottom>
           {new Intl.DateTimeFormat('ko-KR', { dateStyle: 'full' }).format(
