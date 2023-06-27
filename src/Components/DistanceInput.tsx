@@ -7,6 +7,8 @@ interface IDistanceInputProps {
 }
 
 function DistanceInput({ value, onChange }: IDistanceInputProps) {
+  console.log('render');
+
   return (
     <FormControl
       variant="standard"
