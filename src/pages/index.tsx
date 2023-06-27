@@ -56,31 +56,29 @@ export default function Home() {
     },
   ]);
 
-  const handleDistanceInput = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const {
-        currentTarget: { value },
-      } = event;
+  const handleDistanceInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    console.log('render');
 
-      if (isValidNumberWithDot(value)) {
-        setDistance(value);
-      }
-    },
-    []
-  );
+    const {
+      currentTarget: { value },
+    } = event;
 
-  const handleFuelEfficiencyInput = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      const {
-        currentTarget: { value },
-      } = event;
+    if (isValidNumberWithDot(value)) {
+      setDistance(value);
+    }
+  };
 
-      if (isValidNumberWithDot(value)) {
-        setFuelEfficiency(value);
-      }
-    },
-    []
-  );
+  const handleFuelEfficiencyInput = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const {
+      currentTarget: { value },
+    } = event;
+
+    if (isValidNumberWithDot(value)) {
+      setFuelEfficiency(value);
+    }
+  };
 
   const fetchOilPrice = async () => {
     setLoading(true);
