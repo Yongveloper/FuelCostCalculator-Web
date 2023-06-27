@@ -19,12 +19,18 @@ interface IOilListProps {
 
 function OilList({ oils }: IOilListProps) {
   const { setPrice } = usePriceContext();
-  const [value, setValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [selectedRadio, setSelectedRadio] = useState('직접입력');
 
   const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSelectedRadio(event.target.value);
+    const {
+      currentTarget: { value },
+    } = event;
+    setSelectedRadio(value);
+    if (value === '직접입력') {
+      inputRef.current?.focus();
+    }
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -32,22 +38,17 @@ function OilList({ oils }: IOilListProps) {
       currentTarget: { value },
     } = event;
     if (isValidPositiveNumber(value)) {
-      setValue(value);
+      setInputValue(value);
       setPrice(value);
     }
   };
-
-  useEffect(() => {
-    if (selectedRadio === '직접입력') {
-      inputRef.current?.focus();
-    }
-  }, [selectedRadio]);
 
   return (
     <RadioGroup
       aria-labelledby="demo-radio-buttons-group-label"
       defaultValue="직접입력"
       name="radio-buttons-group"
+      value={selectedRadio}
       onChange={handleRadioChange}
     >
       {oils.map((oil) => (
@@ -81,7 +82,8 @@ function OilList({ oils }: IOilListProps) {
               },
             }}
             onChange={handleInputChange}
-            value={value}
+            onFocus={() => setSelectedRadio('직접입력')}
+            value={inputValue}
           />
         </FormControl>
       </Box>
