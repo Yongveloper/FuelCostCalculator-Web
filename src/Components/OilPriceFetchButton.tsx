@@ -15,6 +15,7 @@ function OilPriceFetchButton({ loading, onClick }: IOilPriceFetchButtonProps) {
       loading={loading}
       loadingIndicator="불러오는중..."
       variant="outlined"
+      sx={{ marginY: '4px' }}
     >
       <CachedIcon sx={{ marginRight: '4px' }} />
       <span>전국 주유소 평균 가격 조회하기</span>
