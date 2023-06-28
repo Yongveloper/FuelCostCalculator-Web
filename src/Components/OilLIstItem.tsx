@@ -1,5 +1,5 @@
 import { usePriceContext } from '@/context/PriceProvider';
-import { Box, FormControlLabel, Radio } from '@mui/material';
+import { Box, Divider, FormControlLabel, Radio } from '@mui/material';
 
 interface IOilListItemProps {
   name: string;
@@ -10,26 +10,29 @@ interface IOilListItemProps {
 function OilLIstItem({ name, price, disabled }: IOilListItemProps) {
   const { setPrice } = usePriceContext();
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-      }}
-    >
-      <FormControlLabel
-        value={name}
-        disabled={disabled}
-        control={<Radio />}
-        label={name}
-        onClick={() => setPrice(price)}
-      />
-      <span style={{ color: disabled ? 'rgba(0, 0, 0, 0.38)' : 'initial' }}>
-        (약{' '}
-        <span style={{ fontWeight: 'bold' }}>{disabled ? '---' : price}</span>
-        원/L)
-      </span>
-    </Box>
+    <>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
+        <FormControlLabel
+          value={name}
+          disabled={disabled}
+          control={<Radio />}
+          label={name}
+          onClick={() => setPrice(price)}
+        />
+        <span style={{ color: disabled ? 'rgba(0, 0, 0, 0.38)' : 'initial' }}>
+          (약{' '}
+          <span style={{ fontWeight: 'bold' }}>{disabled ? '---' : price}</span>
+          원/L)
+        </span>
+      </Box>
+      <Divider />
+    </>
   );
 }
 
