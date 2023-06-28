@@ -37,7 +37,7 @@ function OilList({ oils }: IOilListProps) {
     const {
       currentTarget: { value },
     } = event;
-    if (isValidPositiveNumber(value)) {
+    if (isValidPositiveNumber(value) || value === '') {
       setInputValue(value);
       setPrice(value);
     }
@@ -64,7 +64,13 @@ function OilList({ oils }: IOilListProps) {
           disabled={!oils[0].price}
         />
       ))}
-      <Box sx={{ display: 'flex' }}>
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}
+      >
         <FormControlLabel
           value="직접입력"
           control={<Radio />}
