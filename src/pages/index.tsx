@@ -1,16 +1,17 @@
 import { Roboto } from 'next/font/google';
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 import { Button, Container, Typography } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
 import OilList from '@/Components/OilList';
-import { usePriceContext } from '@/context/PriceProvider';
 import DistanceInput from '@/Components/DistanceInput';
 import FuelEfficiencyInput from '@/Components/FuelEfficiencyInput';
 import OilPriceFetchButton from '@/Components/OilPriceFetchButton';
 import { fetchOilPrice, isValidNumberWithDot } from '@/utils';
 import ErrorMsg from '@/Components/ErrorMsg';
+import { usePriceContext } from '@/context/PriceProvider';
 import { IOils } from '@/types';
+import CalculateButton from '@/Components/Calculatebutton';
 
 export default function Home() {
   const { price } = usePriceContext();
@@ -116,13 +117,12 @@ export default function Home() {
         </Typography>
       )}
       <OilList oils={oils} />
-      <Button
-        variant="contained"
-        size="large"
-        sx={{ width: '100%', maxWidth: '320px' }}
-      >
-        계산하기
-      </Button>
+      <CalculateButton
+        distance={Number(distance)}
+        fuelEfficiency={Number(fuelEfficiency)}
+        price={price}
+        disabled={distance && fuelEfficiency && price ? false : true}
+      />
     </Container>
   );
 }
