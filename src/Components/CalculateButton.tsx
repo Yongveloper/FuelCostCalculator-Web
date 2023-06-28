@@ -28,7 +28,7 @@ function CalculateButton({
       variant="contained"
       size="large"
       disabled={disabled}
-      sx={{ width: '100%', maxWidth: '320px' }}
+      sx={{ width: '100%', maxWidth: '320px', marginTop: '12px' }}
       onClick={handleCalculateButton}
     >
       계산하기
