@@ -43,6 +43,11 @@ function OilList({ oils }: IOilListProps) {
     }
   };
 
+  const handleOnFocusInput = () => {
+    setSelectedRadio('직접입력');
+    setPrice(inputValue);
+  };
+
   return (
     <RadioGroup
       aria-labelledby="demo-radio-buttons-group-label"
@@ -82,7 +87,7 @@ function OilList({ oils }: IOilListProps) {
               },
             }}
             onChange={handleInputChange}
-            onFocus={() => setSelectedRadio('직접입력')}
+            onFocus={handleOnFocusInput}
             value={inputValue}
           />
         </FormControl>
