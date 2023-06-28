@@ -85,13 +85,23 @@ export default function Home() {
         minHeight: '100vh',
       }}
     >
-      <Typography variant="h5" component="h2" gutterBottom>
-        <DirectionsCarIcon />
+      <Typography
+        variant="h5"
+        component="h2"
+        gutterBottom
+        sx={{ display: 'flex', alignItems: 'center' }}
+      >
+        <DirectionsCarIcon sx={{ marginRight: '4px' }} />
         운행 거리
       </Typography>
       <DistanceInput value={distance} onChange={handleDistanceInput} />
-      <Typography variant="h5" component="h2" gutterBottom>
-        <LocalGasStationIcon />
+      <Typography
+        variant="h5"
+        component="h2"
+        gutterBottom
+        sx={{ display: 'flex', alignItems: 'center' }}
+      >
+        <LocalGasStationIcon sx={{ marginRight: '4px' }} />
         평균 연비
       </Typography>
       <FuelEfficiencyInput
