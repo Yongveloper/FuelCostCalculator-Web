@@ -1,4 +1,5 @@
 import { Button } from '@mui/material';
+import { useRouter } from 'next/router';
 
 interface ICalculateButtonProp {
   distance: number;
@@ -13,14 +14,22 @@ function CalculateButton({
   price,
   disabled,
 }: ICalculateButtonProp) {
+  const router = useRouter();
   const handleCalculateButton = () => {
+    if (!price) return;
     //예상 주유비 = 주행거리 ÷ 연비 x 기름값
-    if (price) {
-      const expectedPrice = Math.ceil((distance / fuelEfficiency) * price);
-      console.log(expectedPrice);
-      const expectedFuelVolume = (expectedPrice / price).toFixed(3);
-      console.log(expectedFuelVolume);
-    }
+    const expectedPrice = Math.ceil((distance / fuelEfficiency) * price);
+    const expectedFuelVolume = (expectedPrice / price).toFixed(3);
+    router.push({
+      pathname: '/result',
+      query: {
+        distance,
+        fuelEfficiency,
+        price,
+        expectedFuelVolume,
+        expectedPrice,
+      },
+    });
   };
 
   return (
