@@ -17,7 +17,11 @@ function Result() {
 
   return (
     <>
-      <NextSeo canonical="https://fuelcostcalculator.vercel.app/result" />
+      <NextSeo
+        title="기름값 계산기 - 쉽고 빠른 주유비 계산 | 결과 페이지"
+        description="기름값, 주유비, 유류비 계산기의 결과 페이지입니다. 쉽고 빠르게 쥬유비를 계산하세요."
+        canonical="https://fuelcostcalculator.vercel.app/result"
+      />
       <Box sx={{ minWidth: '320px' }}>
         <Box
           sx={{
