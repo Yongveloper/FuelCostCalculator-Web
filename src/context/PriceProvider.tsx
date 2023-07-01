@@ -7,18 +7,18 @@ import {
   ReactNode,
 } from 'react';
 
-export type PriceType = number | null;
+export type PriceType = number;
 
 const defaultPrice: PriceType = 0;
 
 interface IPriceContext {
   price: PriceType;
-  setPrice: (value: string | null) => void;
+  setPrice: (value: string) => void;
 }
 
 const PriceContext = createContext<IPriceContext>({
   price: defaultPrice,
-  setPrice: (value: string | null) => {},
+  setPrice: (value: string) => {},
 });
 
 export const usePriceContext = () => {
@@ -32,8 +32,8 @@ interface PriceProviderProps {
 export const PriceProvider: React.FC<PriceProviderProps> = ({ children }) => {
   const [price, setPrice] = useState<PriceType>(defaultPrice);
 
-  const updatePrice = (value: string | null) => {
-    if (value !== null) {
+  const updatePrice = (value: string) => {
+    if (value !== '') {
       const numberWithCommasRemoved = value.replace(/,/g, '');
       const number = parseFloat(numberWithCommasRemoved);
       setPrice(number);
