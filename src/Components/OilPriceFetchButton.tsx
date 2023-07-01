@@ -3,16 +3,19 @@ import CachedIcon from '@mui/icons-material/Cached';
 import { LoadingButton } from '@mui/lab';
 
 interface IOilPriceFetchButtonProps {
-  loading: boolean;
+  isLoading: boolean;
   onClick: () => void;
 }
 
-function OilPriceFetchButton({ loading, onClick }: IOilPriceFetchButtonProps) {
+function OilPriceFetchButton({
+  isLoading,
+  onClick,
+}: IOilPriceFetchButtonProps) {
   return (
     <LoadingButton
       size="medium"
       onClick={onClick}
-      loading={loading}
+      loading={isLoading}
       loadingIndicator="불러오는중..."
       variant="outlined"
       sx={{ marginY: '4px' }}

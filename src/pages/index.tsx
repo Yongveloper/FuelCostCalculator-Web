@@ -9,33 +9,40 @@ import OilPriceFetchButton from '@/Components/OilPriceFetchButton';
 import { fetchOilPrice, isValidNumberWithDot } from '@/utils';
 import ErrorMsg from '@/Components/ErrorMsg';
 import { usePriceContext } from '@/context/PriceProvider';
-import { IOils } from '@/types';
 import CalculateButton from '@/Components/CalculateButton';
+import useSWR, { mutate } from 'swr';
+
+const initialData = [
+  {
+    name: '고급 휘발유',
+    price: null,
+  },
+  {
+    name: '경유',
+    price: null,
+  },
+  {
+    name: '휘발유',
+    price: null,
+  },
+  {
+    name: 'LPG',
+    price: null,
+  },
+];
 
 export default function Home() {
   const { price } = usePriceContext();
   const [distance, setDistance] = useState('');
   const [fuelEfficiency, setFuelEfficiency] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [oils, setOils] = useState<IOils[]>([
-    {
-      name: '고급 휘발유',
-      price: null,
-    },
-    {
-      name: '경유',
-      price: null,
-    },
-    {
-      name: '휘발유',
-      price: null,
-    },
-    {
-      name: 'LPG',
-      price: null,
-    },
-  ]);
+  const {
+    data: oils,
+    error,
+    isLoading,
+  } = useSWR(process.env.NEXT_PUBLIC_API_KEY as string, fetchOilPrice, {
+    fallbackData: initialData,
+    revalidateOnMount: false,
+  });
 
   const handleDistanceInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {
@@ -60,17 +67,10 @@ export default function Home() {
   };
 
   const handleFetchOilPriceBtn = async () => {
-    setLoading(true);
-    try {
-      const data = await fetchOilPrice();
-      setOils(data);
-    } catch (error) {
-      console.error(error);
-      setError(true);
-      return error;
-    } finally {
-      setLoading(false);
-    }
+    const newData = await fetchOilPrice(
+      process.env.NEXT_PUBLIC_API_KEY as string
+    );
+    mutate(process.env.NEXT_PUBLIC_API_KEY as string, newData, false);
   };
 
   return (
@@ -114,7 +114,7 @@ export default function Home() {
       {error && <ErrorMsg />}
       {oils[0].price === null ? (
         <OilPriceFetchButton
-          loading={loading}
+          isLoading={isLoading}
           onClick={handleFetchOilPriceBtn}
         />
       ) : (

@@ -29,20 +29,16 @@ const getRenamedFuel = (oilName: string) => {
   return name;
 };
 
-export const fetchOilPrice = async () => {
-  try {
-    const data = await fetch(process.env.NEXT_PUBLIC_API_KEY as string);
-    const json: OilData = await data.json();
-    const result = json.RESULT.OIL.filter(
-      (oil) => oil.PRODNM !== '실내등유'
-    ).map((oil) => {
+export const fetchOilPrice = async (url: string) => {
+  const data = await fetch(url);
+  const json: OilData = await data.json();
+  const result = json.RESULT.OIL.filter((oil) => oil.PRODNM !== '실내등유').map(
+    (oil) => {
       return {
         name: getRenamedFuel(oil.PRODNM),
-        price: Math.round(parseInt(oil.PRICE)).toLocaleString('ko-KR'),
+        price: Math.round(parseInt(oil.PRICE)).toLocaleString('ko-KR') || null,
       };
-    });
-    return result;
-  } catch (error) {
-    throw error;
-  }
+    }
+  );
+  return result;
 };
