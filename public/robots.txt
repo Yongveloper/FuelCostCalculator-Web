@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://fuelcostcalculator.vercel.app/sitemap.xml
