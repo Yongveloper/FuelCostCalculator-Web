@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button, Divider, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { ResultPageQuery } from '@/types';
 
@@ -72,7 +72,8 @@ function Result() {
         </Typography>
       </Box>
 
-      <Box sx={{ width: '100%', marginTop: '18px' }}>
+      <Box sx={{ width: '100%' }}>
+        <Divider sx={{ marginY: '12px' }} />
         <Box
           sx={{
             width: '100%',
@@ -85,7 +86,14 @@ function Result() {
             예상 주유량:
           </Typography>
           <Typography variant="h5" component="span">
-            {expectedFuelVolume || 'null'}(L)
+            <Typography
+              variant="h5"
+              component="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              {expectedFuelVolume || 'null'}
+            </Typography>
+            (L)
           </Typography>
         </Box>
         <Box
@@ -99,11 +107,18 @@ function Result() {
             예상 주유비:
           </Typography>
           <Typography variant="h5" component="span">
-            약 {numberWithCommas(expectedPrice) || 'null'}(원)
+            약{' '}
+            <Typography
+              variant="h5"
+              component="span"
+              sx={{ fontWeight: 'bold' }}
+            >
+              {numberWithCommas(expectedPrice) || 'null'}
+            </Typography>
+            (원)
           </Typography>
         </Box>
       </Box>
-
       <Button
         variant="contained"
         size="large"
