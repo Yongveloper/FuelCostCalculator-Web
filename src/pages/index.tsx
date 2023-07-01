@@ -11,6 +11,7 @@ import ErrorMsg from '@/Components/ErrorMsg';
 import { usePriceContext } from '@/context/PriceProvider';
 import CalculateButton from '@/Components/CalculateButton';
 import useSWR, { mutate } from 'swr';
+import Head from 'next/head';
 
 const initialData = [
   {
@@ -76,6 +77,12 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="CYaoNc6HqLsOSdLZsPQPSOUW2UTLv8D94DLu6H485HI"
+        />
+      </Head>
       <Typography
         variant="h5"
         component="h2"
