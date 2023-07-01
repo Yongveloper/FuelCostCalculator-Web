@@ -37,7 +37,6 @@ function Layout({ children }: ILayoutProps) {
           key={router.route}
           initial="initial"
           animate="visible"
-          exit="exit"
           variants={pageVariants}
         >
           <Container
