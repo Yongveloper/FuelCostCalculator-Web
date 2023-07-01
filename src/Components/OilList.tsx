@@ -61,7 +61,7 @@ function OilList({ oils }: IOilListProps) {
           key={oil.name}
           name={oil.name}
           price={oil.price}
-          disabled={!oils[0].price}
+          disabled={oils[0].price.length === 0}
         />
       ))}
       <Box

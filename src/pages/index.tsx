@@ -11,24 +11,23 @@ import ErrorMsg from '@/Components/ErrorMsg';
 import { usePriceContext } from '@/context/PriceProvider';
 import CalculateButton from '@/Components/CalculateButton';
 import useSWR, { mutate } from 'swr';
-import Footer from '@/Components/Footer';
 
 const initialData = [
   {
     name: '고급 휘발유',
-    price: null,
+    price: '',
   },
   {
     name: '경유',
-    price: null,
+    price: '',
   },
   {
     name: '휘발유',
-    price: null,
+    price: '',
   },
   {
     name: 'LPG',
-    price: null,
+    price: '',
   },
 ];
 
@@ -104,7 +103,7 @@ export default function Home() {
         ₩ 유류 가격
       </Typography>
       {error && <ErrorMsg />}
-      {oils[0].price === null ? (
+      {oils[0].price === '' ? (
         <OilPriceFetchButton
           isLoading={isLoading}
           onClick={handleFetchOilPriceBtn}

@@ -36,7 +36,7 @@ export const fetchOilPrice = async (url: string) => {
     (oil) => {
       return {
         name: getRenamedFuel(oil.PRODNM),
-        price: Math.round(parseInt(oil.PRICE)).toLocaleString('ko-KR') || null,
+        price: Math.round(parseInt(oil.PRICE)).toLocaleString('ko-KR') || '',
       };
     }
   );

@@ -15,7 +15,7 @@ export interface OilData {
 }
 export interface IOils {
   name: string;
-  price: string | null;
+  price: string;
 }
 
 export interface ResultPageQuery extends ParsedUrlQuery {

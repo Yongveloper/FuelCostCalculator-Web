@@ -3,7 +3,7 @@ import { Box, Divider, FormControlLabel, Radio } from '@mui/material';
 
 interface IOilListItemProps {
   name: string;
-  price: string | null;
+  price: string;
   disabled: boolean;
 }
 
