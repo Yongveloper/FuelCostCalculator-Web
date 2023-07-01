@@ -15,18 +15,7 @@ function Result() {
   };
 
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        maxWidth: '350px',
-        paddingX: '24px',
-        margin: 'auto',
-        minHeight: '100vh',
-      }}
-    >
+    <Box sx={{ minWidth: '320px' }}>
       <Box
         sx={{
           width: '100%',

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Container, Typography } from '@mui/material';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import LocalGasStationIcon from '@mui/icons-material/LocalGasStation';
@@ -11,6 +11,7 @@ import ErrorMsg from '@/Components/ErrorMsg';
 import { usePriceContext } from '@/context/PriceProvider';
 import CalculateButton from '@/Components/CalculateButton';
 import useSWR, { mutate } from 'swr';
+import Footer from '@/Components/Footer';
 
 const initialData = [
   {
@@ -41,6 +42,7 @@ export default function Home() {
     isLoading,
   } = useSWR(process.env.NEXT_PUBLIC_API_KEY as string, fetchOilPrice, {
     fallbackData: initialData,
+    revalidateOnFocus: false,
     revalidateOnMount: false,
   });
 
@@ -74,17 +76,7 @@ export default function Home() {
   };
 
   return (
-    <Container
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        maxWidth: 'sm',
-        margin: 'auto',
-        minHeight: '100vh',
-      }}
-    >
+    <>
       <Typography
         variant="h5"
         component="h2"
@@ -132,6 +124,6 @@ export default function Home() {
         price={price}
         disabled={distance && fuelEfficiency && price ? false : true}
       />
-    </Container>
+    </>
   );
 }
