@@ -7,8 +7,7 @@ import { DefaultSeo } from 'next-seo';
 
 const DEFAULT_SEO = {
   title: '기름값 계산기 - 쉽고 빠른 주유비 계산',
-  description:
-    '쉽고 빠르게 주유비, 기름값, 유류비 계산을 해보세요!, 기름값,유류비,주유비 계산기는 여러분의 자동차의 연료 소비와 비용을 추적하고 분석하여 효율적인 연료 비용 관리를 돕는 도구입니다.',
+  description: '쉽고 빠르게 주유비, 기름값, 유류비 계산을 해보세요!',
   openGraph: {
     type: 'website',
     locale: 'ko_KR',
