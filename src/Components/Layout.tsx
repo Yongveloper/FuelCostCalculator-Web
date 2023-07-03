@@ -45,7 +45,7 @@ function Layout({ children }: ILayoutProps) {
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
-              maxWidth: 'sm',
+              maxWidth: '480px',
               minHeight: '100vh',
               margin: 'auto',
             }}
