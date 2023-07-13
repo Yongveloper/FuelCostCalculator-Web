@@ -8,7 +8,7 @@
   "scope": "/",
   "short_name": "기름값 계산기 - 쉽고 빠른 주유비 계산",
   "start_url": "/",
-  "theme_color": "#317EFB",
+  "theme_color": "#fff",
   "categories": ["utilities"],
   "screenshots": [],
   "icons": [

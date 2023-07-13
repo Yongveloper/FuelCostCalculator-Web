@@ -9,7 +9,7 @@ export default function Document() {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5623149944196012"
           crossOrigin="anonymous"
         ></script>
-        <meta name="theme-color" content="#317EFB" />
+        <meta name="theme-color" content="#fff" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="icons/icon-192x192.png"></link>
         <link
