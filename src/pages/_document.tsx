@@ -9,6 +9,24 @@ export default function Document() {
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5623149944196012"
           crossOrigin="anonymous"
         ></script>
+        <meta name="theme-color" content="#317EFB" />
+        <link rel="manifest" href="/manifest.json" />
+        <link rel="apple-touch-icon" href="icons/icon-192x192.png"></link>
+        <link
+          href="iphonex_splash.png"
+          media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)"
+          rel="apple-touch-startup-image"
+        />
+        <link
+          href="iphonexr_splash.png"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image"
+        />
+        <link
+          href="iphonexsmax_splash.png"
+          media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)"
+          rel="apple-touch-startup-image"
+        />
       </Head>
       <body>
         <Main />
